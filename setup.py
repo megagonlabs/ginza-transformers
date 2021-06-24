@@ -15,7 +15,7 @@ setup(
     ],
     license="MIT",
     name="ginza-transformers",
-    packages=find_packages(include=["ginza_transformers"]),
+    packages=find_packages(include=["ginza_transformers", "ginza_transformers.layers"]),
     url="https://github.com/megagonlabs/ginza-transformers",
     version='0.1.0',
 )
