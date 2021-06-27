@@ -26,7 +26,7 @@ def huggingface_from_pretrained_custom(source: Union[Path, str], config: Dict):
         from importlib import import_module
         tokenizer_module = import_module(".".join(tokenizer_class_name[:-1]))
         tokenizer_class = getattr(tokenizer_module, tokenizer_class_name[-1])
-        tokenizer = tokenizer_class(vocab_file=source + "/vocab.txt", **config)
+        tokenizer = tokenizer_class(vocab_file=str_path + "/vocab.txt", **config)
 
     transformer = AutoModel.from_pretrained(str_path)
     ops = get_current_ops()
