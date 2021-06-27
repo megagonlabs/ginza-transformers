@@ -1,3 +1,3 @@
 # ginza-transformers
 
-Now preparing for alpha-release.
+Now preparing for beta release.
