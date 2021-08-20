@@ -22,8 +22,6 @@ max_batch_items = 4096
 
 [transformer_custom.model]
 @architectures = "ginza-transformers.TransformerModel.v1"
-name = "electra-base-ud-japanese-discriminator"
-tokenizer_config = {"use_fast": false, "tokenizer_class": "sudachitra.tokenization_electra_sudachipy.ElectraSudachipyTokenizer"}
 
 [transformer_custom.model.get_spans]
 @span_getters = "spacy-transformers.strided_spans.v1"
@@ -64,7 +62,7 @@ class TransformerCustom(Transformer):
         def load_model(p):
             p = Path(p).absolute()
             tokenizer, transformer = huggingface_from_pretrained_custom(
-                p, self.model.attrs["tokenizer_config"]
+                p, self.model.attrs["tokenizer_config"], self.model.attrs["name"]
             )
             self.model.attrs["tokenizer"] = tokenizer
             self.model.attrs["set_transformer"](self.model, transformer)
