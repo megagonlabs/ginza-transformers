@@ -1,6 +1,6 @@
 # ginza-transformers: Use custom tokenizers in spacy-transformers
 
-The `ginza-transformers` is a simple extension of the [spacy-transformers](https://github.com/explosion/spacy-transformers) to use the tokenizers defined outside of [huggingface/transformers](https://huggingface.co/transformers/), and download the models automatically at run time.
+The `ginza-transformers` is a simple extension of the [spacy-transformers](https://github.com/explosion/spacy-transformers) to use the custom tokenizers (defined outside of [huggingface/transformers](https://huggingface.co/transformers/)) in `transformer` pipeline component of [spaCy v3](https://spacy.io/usage/v3). The `ginza-transformers` also provides the ability to download the models from [Hugging Face Hub](https://huggingface.co/models) automatically at run time.
 
 ## Fall-back mechanisms
 There are two fall-back tricks in `ginza-transformers`.
