@@ -50,7 +50,7 @@ dict_type = "core"
 
 ### Setting for analysis phases
 [Here is an example](https://github.com/megagonlabs/ginza/blob/develop/config/ja_ginza_electra.analysis.cfg) of `config.cfg` for analysis phase.
-This config refers [`megagonlabs/tansformers-ud-japanese-electra-base-ginza`](https://huggingface.co/models/megagonlabs/tansformers-ud-japanese-electra-base-ginza). The transformer model specified at `components.transformer.model.name` would be downloaded from the Hugging Face Hub at run time.
+This config references [`megagonlabs/tansformers-ud-japanese-electra-base-ginza`](https://huggingface.co/models/megagonlabs/tansformers-ud-japanese-electra-base-ginza). The transformer model specified at `components.transformer.model.name` would be downloaded from the Hugging Face Hub at run time.
 The attributes of the analysis phase that differ from the training phase are as follows:
 ```
 [components.transformer]
