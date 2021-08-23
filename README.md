@@ -8,12 +8,13 @@ There are two fallback tricks in `ginza-transformers`.
 ### Cutom tokenizer fallbacking
 Loading a custom tokenizer specified in `components.transformer.model.tokenizer_config.tokenizer_class` attribute of `config.cfg` of a spaCy language model package, as follows.
 - `ginza-transformers` initially tries to import a tokenizer class with the standard manner of `huggingface/transformers` (via `AutoTokenizer.from_pretrained()`)
-- If a `ValueError` raised from `AutoTokenizer.from_pretrained()`, the fall-back logic of `ginza-transformers` tries to import the class via `importlib.import_module` with the `tokenizer_class` value
+- If a `ValueError` raised from `AutoTokenizer.from_pretrained()`, the fallback logic of `ginza-transformers` tries to import the class via `importlib.import_module` with the `tokenizer_class` value
 
-### Run time model loading
+### Model loading at run time
 Downloading the model files published in Hugging Face Hub at run time, as follows.
 - `ginza-transformers` initially tries to load local model directory (i.e. `/${local_spacy_model_dir}/transformer/model/`)
-- If `OSError` raised, the fall-back logic passes a model name specified in `components.transformer.model.name` attribute of `config.cfg` to `AutoModel.from_pretrained()`
+- If `OSError` raised, the first fallback logic passes a model name specified in `components.transformer.model.name` attribute of `config.cfg` to `AutoModel.from_pretrained()` with `local_files_only=True` option, which means the first fallback logic will immediately look in the local cache and will not reference the Hugging Face Hub at this point
+- If `OSError` raised from the first fallback logic, the second fallback logic executes `AutoModel.from_pretrained()` without `local_files_only` option, which means the second fallback logic will search specified model name in the Hugging Face Hub
 
 ## How to use
 Before executing `spacy train` command, make sure that [spaCy is working with cuda suppot](https://spacy.io/usage#gpu), and then install this package like:
