@@ -32,9 +32,9 @@ def huggingface_from_pretrained_custom(source: Union[Path, str], tokenizer_confi
         transformer = AutoModel.from_pretrained(str_path)
     except OSError as e:
         try:
-            transformer = AutoModel.from_pretrained(model_name)
+            transformer = AutoModel.from_pretrained(model_name, local_files_only=True)
         except OSError as e2:
-            raise e
+            transformer = AutoModel.from_pretrained(model_name)
     ops = get_current_ops()
     if isinstance(ops, CupyOps):
         transformer.cuda()
