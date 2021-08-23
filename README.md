@@ -26,7 +26,7 @@ You need to use `config.cfg` with a different setting when performing the analys
 
 ### Setting for training phase
 [Here is an example](https://github.com/megagonlabs/ginza/blob/develop/config/ja_ginza_electra.cfg) of spaCy's `config.cfg` for training phase.
-With this config, `ginza-transformers` employs [`SudachiTra`](https://github.com/WorksApplications/SudachiTra) as a transformer tokenizer and use [`megagonlabs/tansformers-ud-japanese-electra-base-discriminator`](https://huggingface.co/megagonlabs/tansformers-ud-japanese-electra-base-discriminator) as a pretrained transformer model.
+With this config, `ginza-transformers` employs [`SudachiTra`](https://github.com/WorksApplications/SudachiTra) as a transformer tokenizer and use [`megagonlabs/tansformers-ud-japanese-electra-base-discriminator`](https://huggingface.co/megagonlabs/transformers-ud-japanese-electra-base-discriminator) as a pretrained transformer model.
 The attributes of the training phase that differ from the defaults of spacy-transformers model are as follows:
 ```
 [components.transformer.model]
@@ -50,7 +50,7 @@ dict_type = "core"
 
 ### Setting for analysis phases
 [Here is an example](https://github.com/megagonlabs/ginza/blob/develop/config/ja_ginza_electra.analysis.cfg) of `config.cfg` for analysis phase.
-This config references [`megagonlabs/tansformers-ud-japanese-electra-base-ginza`](https://huggingface.co/megagonlabs/tansformers-ud-japanese-electra-base-ginza). The transformer model specified at `components.transformer.model.name` would be downloaded from the Hugging Face Hub at run time.
+This config references [`megagonlabs/tansformers-ud-japanese-electra-base-ginza`](https://huggingface.co/megagonlabs/transformers-ud-japanese-electra-base-ginza). The transformer model specified at `components.transformer.model.name` would be downloaded from the Hugging Face Hub at run time.
 The attributes of the analysis phase that differ from the training phase are as follows:
 ```
 [components.transformer]
