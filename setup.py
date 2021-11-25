@@ -9,9 +9,6 @@ setup(
         "spacy_factories": [
             "transformer_custom = ginza_transformers.pipeline_component:make_transformer_custom",
         ],
-        "spacy_architectures": [
-            "ginza-transformers.TransformerModel.v1 = ginza_transformers:architectures.TransformerModelCustom",
-        ],
     },
     install_requires=[
         "spacy-transformers>=1.1.2,<1.2.0",

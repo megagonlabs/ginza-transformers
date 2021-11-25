@@ -22,7 +22,7 @@ max_batch_items = 4096
 @annotation_setters = "spacy-transformers.null_annotation_setter.v1"
 
 [transformer_custom.model]
-@architectures = "ginza-transformers.TransformerModel.v3"
+@architectures = "spacy-transformers.TransformerModel.v3"
 
 [transformer_custom.model.get_spans]
 @span_getters = "spacy-transformers.strided_spans.v1"
