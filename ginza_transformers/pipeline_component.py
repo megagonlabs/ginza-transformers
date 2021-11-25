@@ -1,6 +1,6 @@
 from pathlib import Path
 import sys
-from typing import List, Callable, Iterable, Union
+from typing import List, Callable, Iterable, Optional, Union
 
 from spacy.language import Language
 from spacy.tokens import Doc
@@ -8,8 +8,10 @@ from thinc.api import Model, Config
 
 from spacy_transformers.data_classes import FullTransformerBatch
 from spacy_transformers.pipeline_component import Transformer, DOC_EXT_ATTR
+from spacy.training import Example
 
 from .layers.hf_shim_custom import override_hf_shims_from_bytes, recover_hf_shims_from_bytes
+from .layers.transformer_model import override_huggingface_from_pretrained, recover_huggingface_from_pretrained
 
 
 DEFAULT_CONFIG_STR = """
@@ -54,10 +56,21 @@ def make_transformer_custom(
 
 class TransformerCustom(Transformer):
 
+    def initialize(
+        self,
+        get_examples: Callable[[], Iterable[Example]],
+        *,
+        nlp: Optional[Language] = None,
+    ):
+        origin = override_huggingface_from_pretrained()
+        try:
+            super().initialize(get_examples, nlp=nlp)
+        finally:
+            recover_huggingface_from_pretrained(origin)
+
     def from_disk(
         self, path: Union[str, Path], *, exclude: Iterable[str] = tuple()
     ) -> "TransformerCustom":
-
         origin = override_hf_shims_from_bytes()
         try:
             super().from_disk(path, exclude=exclude)
