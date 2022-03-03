@@ -12,6 +12,7 @@ setup(
     },
     install_requires=[
         "spacy-transformers>=1.1.2,<1.2.0",
+        "transformers<4.13.0",
     ],
     license="MIT",
     name="ginza-transformers",
