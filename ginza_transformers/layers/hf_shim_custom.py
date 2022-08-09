@@ -124,11 +124,14 @@ class HFShimCustom(HFShim):
                 transformer.load_state_dict(torch.load(filelike, map_location=map_location))
             else:
                 try:
-                    transformer = AutoModel.from_pretrained(config._name_or_path, local_files_only=True)
-                except OSError as e2:
-                    print("trying to download model from huggingface hub:", config._name_or_path, "...", file=sys.stderr)
-                    transformer = AutoModel.from_pretrained(config._name_or_path)
-                    print("succeded", file=sys.stderr)
+                    transformer = AutoModel.from_pretrained(config_dict["_name_or_path"], local_files_only=True)
+                except OSError as e1:
+                    try:
+                        transformer = AutoModel.from_pretrained(config._name_or_path)
+                    except OSError as e2:
+                        print("trying to download model from huggingface hub:", config_dict["_name_or_path"], "...", file=sys.stderr)
+                        transformer = AutoModel.from_pretrained(config_dict["_name_or_path"])
+                        print("succeded", file=sys.stderr)
 
             transformer.to(map_location)
             self._model = transformer
