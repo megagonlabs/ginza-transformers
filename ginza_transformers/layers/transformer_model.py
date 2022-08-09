@@ -55,10 +55,10 @@ def huggingface_from_pretrained_custom(
     try:
         trf_config["return_dict"] = True
         config = AutoConfig.from_pretrained(str_path, **trf_config)
-        transformer = AutoModel.from_pretrained(str_path, config=config)
-    except OSError as e:
+        transformer = AutoModel.from_pretrained(model_name, local_files_only=True)
+    except OSError as e1:
         try:
-            transformer = AutoModel.from_pretrained(str_path, local_files_only=True)
+            transformer = AutoModel.from_pretrained(str_path, config=config)
         except OSError as e2:
             model_name = str(source)
             print("trying to download model from huggingface hub:", model_name, "...", file=sys.stderr)
