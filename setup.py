@@ -14,12 +14,6 @@ setup(
         "ginza>=5.3.0",
         "spacy-transformers==1.4.0",
     ],
-    extras_require={
-        "cpu": [],
-        "apple": ["thinc-apple-ops"],
-        "cuda11x": ["cupy-cuda11x"],
-        "cuda12x": ["cupy-cuda12x"],
-    },
     license="MIT",
     name="ginza-transformers",
     packages=find_packages(include=["ginza_transformers", "ginza_transformers.layers"]),
