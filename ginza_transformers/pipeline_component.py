@@ -1,5 +1,4 @@
 from pathlib import Path
-import sys
 from typing import List, Callable, Iterable, Optional, Union
 
 from spacy.language import Language
@@ -23,6 +22,10 @@ max_batch_items = 4096
 
 [transformer_custom.model]
 @architectures = "spacy-transformers.TransformerModel.v3"
+tokenizer_config = {}
+transformer_config = {}
+mixed_precision = false
+grad_scaler_config = {}
 
 [transformer_custom.model.get_spans]
 @span_getters = "spacy-transformers.strided_spans.v1"
@@ -45,6 +48,20 @@ def make_transformer_custom(
     set_extra_annotations: Callable[[List[Doc], FullTransformerBatch], None],
     max_batch_items: int,
 ):
+    """Construct a Transformer component, which lets you plug a model from the
+    Huggingface transformers library into spaCy so you can use it in your
+    pipeline. One or more subsequent spaCy components can use the transformer
+    outputs as features in its model, with gradients backpropagated to the single
+    shared weights.
+
+    model (Model[List[Doc], FullTransformerBatch]): A thinc Model object wrapping
+        the transformer. Usually you will want to use the TransformerModel
+        layer for this.
+    set_extra_annotations (Callable[[List[Doc], FullTransformerBatch], None]): A
+        callback to set additional information onto the batch of `Doc` objects.
+        The doc._.trf_data attribute is set prior to calling the callback.
+        By default, no additional annotations are set.
+    """
     return TransformerCustom(
         nlp.vocab,
         model,

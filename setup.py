@@ -11,11 +11,11 @@ setup(
         ],
     },
     install_requires=[
-        "spacy-transformers>=1.1.2,<1.2.0",
+        "spacy-transformers==1.4.0",
     ],
     license="MIT",
     name="ginza-transformers",
     packages=find_packages(include=["ginza_transformers", "ginza_transformers.layers"]),
     url="https://github.com/megagonlabs/ginza-transformers",
-    version='0.4.2',
+    version='1.4.0',
 )
